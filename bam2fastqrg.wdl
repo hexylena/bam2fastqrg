@@ -41,11 +41,25 @@ workflow Bam2FastqRG {
                 inputBam = sample.file,
                 outputPath = sampleDir,
                 timeMinutes = 1,
+                threads = 2,
+        }
+
+        scatter (bam in samtoolsTask.splitBam) {
+            call samtools.Fastq as fastqTask {
+                input:
+                    inputBam = bam,
+                    outputRead1 = sampleDir + "/fastq/" + basename(bam, ".bam") + '_R1.fastq.gz',
+                    outputRead2 = sampleDir + "/fastq/" + basename(bam, ".bam") + '_R2.fastq.gz',
+                    threads = 2,
+            }
         }
     }
 
     output {
-        Array[File] bamFiles = flatten(samtoolsTask.split)
+        Array[File] bamFiles = flatten(samtoolsTask.splitBam)
+        Array[File] bamIndex = flatten(samtoolsTask.splitBamIndex)
+        Array[File] fq_r1 = flatten(fastqTask.outputRead1)
+        Array[File] fq_r2 = flatten(fastqTask.outputRead2)
     }
 
     parameter_meta {
@@ -55,6 +69,7 @@ workflow Bam2FastqRG {
 
         # output
         bamFiles: {description: "The read-group split BAM files."}
+        bamIndex: {description: "Indexes for the bam files."}
     }
 }
 
