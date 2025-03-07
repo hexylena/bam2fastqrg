@@ -3,3 +3,7 @@ cromwell-executions/
 cromwell-workflow-logs/
 target/
 test-output/
+
+# pixi environments
+.pixi
+*.egg-info
