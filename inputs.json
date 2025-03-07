@@ -2,7 +2,7 @@
   "Bam2FastqRG.outputPrefix": "split/",
   "Bam2FastqRG.samples": [
     {
-      "file": "HG00154.mapped.ILLUMINA.bwa.GBR.low_coverage.20101123.bam",
+      "file": "c17.bam",
       "id": "HG00154"
     }
   ]

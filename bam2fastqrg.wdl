@@ -41,7 +41,6 @@ workflow Bam2FastqRG {
                 inputBam = sample.file,
                 outputPath = sampleDir,
                 timeMinutes = 1,
-                threads = 2,
         }
 
         scatter (bam in samtoolsTask.splitBam) {
@@ -50,7 +49,6 @@ workflow Bam2FastqRG {
                     inputBam = bam,
                     outputRead1 = sampleDir + "/fastq/" + basename(bam, ".bam") + '_R1.fastq.gz',
                     outputRead2 = sampleDir + "/fastq/" + basename(bam, ".bam") + '_R2.fastq.gz',
-                    threads = 2,
             }
         }
     }
@@ -58,8 +56,8 @@ workflow Bam2FastqRG {
     output {
         Array[File] bamFiles = flatten(samtoolsTask.splitBam)
         Array[File] bamIndex = flatten(samtoolsTask.splitBamIndex)
-        Array[File] fq_r1 = flatten(fastqTask.outputRead1)
-        Array[File] fq_r2 = flatten(fastqTask.outputRead2)
+        Array[File] fq_r1 = flatten(fastqTask.read1)
+        Array[File?] fq_r2 = flatten(fastqTask.read2)
     }
 
     parameter_meta {
