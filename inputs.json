@@ -1,9 +1,0 @@
-{
-  "Bam2FastqRG.outputPrefix": "split/",
-  "Bam2FastqRG.samples": [
-    {
-      "file": "c17.bam",
-      "id": "HG00154"
-    }
-  ]
-}
