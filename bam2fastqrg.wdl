@@ -21,6 +21,7 @@ version 1.0
 # SOFTWARE.
 
 import "tasks/samtools.wdl" as samtools
+import "tasks/biopet.wdl" as biopet
 
 struct SampleDataset {
     String id
@@ -37,18 +38,30 @@ workflow Bam2FastqRG {
         String sampleDir = "~{outputPrefix}/~{sample.id}"
 
         call samtools.Split as samtoolsTask {
-            input: 
+            input:
                 inputBam = sample.file,
                 outputPath = sampleDir,
-                timeMinutes = 1,
         }
 
         scatter (bam in samtoolsTask.splitBam) {
-            call samtools.Fastq as fastqTask {
+            call samtools.Quickcheck as quickCheckTask {
                 input:
                     inputBam = bam,
+            }
+
+            call samtools.Fastq as fastqTask {
+                input:
+                    inputBam = quickCheckTask.outputBam,
                     outputRead1 = sampleDir + "/fastq/" + basename(bam, ".bam") + '_R1.fastq.gz',
                     outputRead2 = sampleDir + "/fastq/" + basename(bam, ".bam") + '_R2.fastq.gz',
+                    outputRead0 = sampleDir + "/fastq/" + basename(bam, ".bam") + '_R0.fastq.gz',
+                    outputReadS = sampleDir + "/fastq/" + basename(bam, ".bam") + '_RS.fastq.gz',
+            }
+
+            call biopet.ValidateFastq as validateFastqTask {
+                input:
+                    inputRead1 = fastqTask.read1,
+                    inputRead2 = fastqTask.read2,
             }
         }
     }
@@ -61,7 +74,7 @@ workflow Bam2FastqRG {
     }
 
     parameter_meta {
-        # input 
+        # input
         samples: {description: "The samples with an id path.", category: "required"}
         outputPrefix: {description: "Where to place the data.", category: "advanced"}
 
@@ -70,4 +83,3 @@ workflow Bam2FastqRG {
         bamIndex: {description: "Indexes for the bam files."}
     }
 }
-
