@@ -3097,4 +3097,136 @@
                                     current: false,
                                     icon: 'assets/workflow-unselected.svg',
                                 }
-                            }" class="flex flex-row items-center gap-x-1" x-bind:class="node.current ? 'bg-slate-800' : hover ? 'bg-slate-700' : ''"><div class="w-px h-6 mr-2 flex-none"></div><div class="w-px h-6 mr-2 flex-none border rounded-none border-gray-700"></div><div class="flex flex-row items-center gap-x-1" x-on:mouseenter="hover = true" x-on:mouseleave="hover = false"><img x-bind:src="node.icon" class="w-4 h-4" alt="Workflow icon"><p class="" x-bind:class="node.current ? 'text-slate-50' : 'hover:text-slate-50'"><a href="bam2fastqrg/Bam2FastqRG-workflow.html">Bam2FastqRG</a></p></div></li></ul></li></ul></div></div></div><div class="layout__main-center"><button type="button" class="layout__mobile-menu-button" x-on:click="open = !open" aria-label="Toggle menu"><svg viewBox="0 0 100 80" width="40" height="40" stroke="none" fill="currentColor"><rect width="100" height="15"></rect><rect y="35" width="100" height="15"></rect><rect y="70" width="100" height="15"></rect></svg></button><div class=""><h1 class="">Home</h1><img src="assets/missing-home.svg" class="size-12" alt="Missing home icon"><h2>There's nothing to see on this page</h2><p>The markdown file for this page wasn't supplied.</p></div></div><div class="layout__sidebar-right"><div class="right-sidebar__container"><div class="right-sidebar__header">ON THIS PAGE</div><div class="right-sidebar__back-to-top-container"><a href="#title" class="right-sidebar__back-to-top"><span class="right-sidebar__back-to-top-icon">↑</span><span class="right-sidebar__back-to-top-text">Back to top</span></a></div></div></div></div></body></html>
+                            }" class="flex flex-row items-center gap-x-1" x-bind:class="node.current ? 'bg-slate-800' : hover ? 'bg-slate-700' : ''"><div class="w-px h-6 mr-2 flex-none"></div><div class="w-px h-6 mr-2 flex-none border rounded-none border-gray-700"></div><div class="flex flex-row items-center gap-x-1" x-on:mouseenter="hover = true" x-on:mouseleave="hover = false"><img x-bind:src="node.icon" class="w-4 h-4" alt="Workflow icon"><p class="" x-bind:class="node.current ? 'text-slate-50' : 'hover:text-slate-50'"><a href="bam2fastqrg/Bam2FastqRG-workflow.html">Bam2FastqRG</a></p></div></li></ul></li></ul></div></div></div><div class="layout__main-center"><button type="button" class="layout__mobile-menu-button" x-on:click="open = !open" aria-label="Toggle menu"><svg viewBox="0 0 100 80" width="40" height="40" stroke="none" fill="currentColor"><rect width="100" height="15"></rect><rect y="35" width="100" height="15"></rect><rect y="70" width="100" height="15"></rect></svg></button><div class=""><h1 class="">Home</h1><div class="markdown-body" data-theme="dark"><h1>Bam2FastqRG</h1>
+<h2>Inputs</h2>
+<h3>Required inputs</h3>
+<p>
+        <b>Bam2FastqRG.samples</b><br>
+        <i>Array[SampleDataset] — Default: None</i><br>
+        The samples with an id path.
+</p>
+<h3>Other common inputs</h3>
+<p>
+        <b>Bam2FastqRG.samtoolsTask.filenameFormat</b><br>
+        <i>String — Default: "%!.%."</i><br>
+        Format of the filename, the following tokens can be used: %% a literal % sign, %* basename,  %# @RG index, %! @RG ID, %. filename extension for output format
+</p>
+<p>
+        <b>Bam2FastqRG.samtoolsTask.unaccountedPath</b><br>
+        <i>String? — Default: None</i><br>
+        The location to write reads to which are not detected as being part of an existing read group.
+</p>
+<h3>Advanced inputs</h3>
+<details>
+<summary> Show/Hide </summary>
+<p>
+        <b>Bam2FastqRG.fastqTask.appendReadNumber</b><br>
+        <i>Boolean — Default: false</i><br>
+        Append /1 and /2 to the read name, or don't. Corresponds to `-n/N`.
+</p>
+<p>
+        <b>Bam2FastqRG.fastqTask.compressionLevel</b><br>
+        <i>Int? — Default: None</i><br>
+        Set compression level when writing gz or bgzf fastq files.
+</p>
+<p>
+        <b>Bam2FastqRG.fastqTask.dockerImage</b><br>
+        <i>String — Default: "quay.io/biocontainers/samtools:1.16.1--h6899075_1"</i><br>
+        The docker image used for this task. Changing this may result in errors which the developers may choose not to address.
+</p>
+<p>
+        <b>Bam2FastqRG.fastqTask.excludeFilter</b><br>
+        <i>Int? — Default: None</i><br>
+        Exclude reads with ONE OR MORE of these flags. Corresponds to `-F`.
+</p>
+<p>
+        <b>Bam2FastqRG.fastqTask.excludeSpecificFilter</b><br>
+        <i>Int? — Default: None</i><br>
+        Exclude reads with ALL of these flags. Corresponds to `-G`.
+</p>
+<p>
+        <b>Bam2FastqRG.fastqTask.includeFilter</b><br>
+        <i>Int? — Default: None</i><br>
+        Include reads with ALL of these flags. Corresponds to `-f`.
+</p>
+<p>
+        <b>Bam2FastqRG.fastqTask.memory</b><br>
+        <i>String — Default: "1GiB"</i><br>
+        The amount of memory this job will use.
+</p>
+<p>
+        <b>Bam2FastqRG.fastqTask.outputQuality</b><br>
+        <i>Boolean — Default: false</i><br>
+        Equivalent to samtools fastq's `-O` flag.
+</p>
+<p>
+        <b>Bam2FastqRG.fastqTask.outputRead0</b><br>
+        <i>String? — Default: None</i><br>
+        The location the unpaired reads should be written to (in case of paired-end sequenicng).
+</p>
+<p>
+        <b>Bam2FastqRG.fastqTask.threads</b><br>
+        <i>Int — Default: 1</i><br>
+        The number of threads to use.
+</p>
+<p>
+        <b>Bam2FastqRG.fastqTask.timeMinutes</b><br>
+        <i>Int — Default: 1 + ceil((size(inputBam) * 2))</i><br>
+        The maximum amount of time the job will run in minutes.
+</p>
+<p>
+        <b>Bam2FastqRG.outputPrefix</b><br>
+        <i>String — Default: "."</i><br>
+        Where to place the data.
+</p>
+<p>
+        <b>Bam2FastqRG.samtoolsTask.compressionLevel</b><br>
+        <i>Int — Default: 1</i><br>
+        Set compression level when writing gz or bgzf fastq files.
+</p>
+</details>
+<h3>Other inputs</h3>
+<details>
+<summary> Show/Hide </summary>
+<p>
+        <b>Bam2FastqRG.samtoolsTask.dockerImage</b><br>
+        <i>String — Default: "quay.io/biocontainers/samtools:1.16.1--h6899075_1"</i><br>
+        ???
+</p>
+<p>
+        <b>Bam2FastqRG.samtoolsTask.memory</b><br>
+        <i>String — Default: "1GiB"</i><br>
+        ???
+</p>
+<p>
+        <b>Bam2FastqRG.samtoolsTask.threads</b><br>
+        <i>Int — Default: 1</i><br>
+        ???
+</p>
+</details>
+<h2>Outputs</h2>
+<p>
+        <b>Bam2FastqRG.bamFiles</b><br>
+        <i>Array[File]</i><br>
+        The read-group split BAM files.
+</p>
+<p>
+        <b>Bam2FastqRG.bamIndex</b><br>
+        <i>Array[File]</i><br>
+        Indexes for the bam files.
+</p>
+<p>
+        <b>Bam2FastqRG.fq_r1</b><br>
+        <i>Array[File]</i><br>
+        ???
+</p>
+<p>
+        <b>Bam2FastqRG.fq_r2</b><br>
+        <i>Array[File?]</i><br>
+        ???
+</p>
+<hr>
+<blockquote>
+<p>Generated using WDL AID (1.0.1)</p>
+</blockquote>
+</div></div></div><div class="layout__sidebar-right"><div class="right-sidebar__container"><div class="right-sidebar__header">ON THIS PAGE</div><div class="right-sidebar__back-to-top-container"><a href="#title" class="right-sidebar__back-to-top"><span class="right-sidebar__back-to-top-icon">↑</span><span class="right-sidebar__back-to-top-text">Back to top</span></a></div></div></div></div></body></html>
