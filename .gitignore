@@ -7,3 +7,4 @@ test-output/
 # pixi environments
 .pixi
 *.egg-info
+.miniwdl
